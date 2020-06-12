@@ -1,5 +1,5 @@
 @use "./BeverageCardVars" as bcard;
-
+@use '~main.scss' as main;
 .BeverageCard {
   //Colors, Fonts, Borders
   background-color: rgb(201, 201, 236);
@@ -10,9 +10,11 @@
   justify-content: flex-start;
   align-items: center;
   //Diamensions
-  width: 45vw;
-  height: 33.3vh;
+  width: 40vw;
+  min-width: 150px;
 
+  height: 33.3vh;
+  min-height: 150px;
   //Position
   //Margin, Padding
   //Transition, Animation
@@ -49,4 +51,25 @@
   list-style: none;
   width: 100%;
   height: 100%;
+}
+
+@media only screen and (min-width: main.$small-start-width) {
+  .BeverageCard {
+    width: 30vw;
+  }
+}
+@media only screen and (min-width: main.$medium-start-width) {
+  .BeverageCard {
+    width: 23vw;
+  }
+}
+@media only screen and (min-width: main.$large-start-width) {
+  .BeverageCard {
+    width: 18vw;
+  }
+}
+@media only screen and (min-width: main.$x-large-start-width) {
+  .BeverageCard {
+    width: 14vw;
+  }
 }

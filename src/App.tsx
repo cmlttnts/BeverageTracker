@@ -10,6 +10,11 @@ const App = (): JSX.Element => (
       <BeverageCard imgSrc={tea} name="Tea1" />
       <BeverageCard imgSrc={tea} name="Tea2" />
       <BeverageCard imgSrc={tea} name="Tea3" />
+      <BeverageCard imgSrc={tea} name="Tea4" />
+      <BeverageCard imgSrc={tea} name="Tea5" />
+      <BeverageCard imgSrc={tea} name="Tea6" />
+      <BeverageCard imgSrc={tea} name="Tea7" />
+      <BeverageCard imgSrc={tea} name="Tea8" />
     </div>
   </div>
 );
