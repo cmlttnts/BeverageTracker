@@ -1,3 +1,4 @@
+//GENERAL RESETS, CONFIGS TEMPLATE
 * {
   box-sizing: border-box;
   margin: 0;
@@ -39,8 +40,8 @@ a:visited {
 
 // BUTTON
 
-$def_btn_bgc: rgb(47, 108, 165);
-$def_btn_bgc_hover: rgb(85, 196, 240);
+$def_btn_bgc: rgb(82, 157, 228);
+$def_btn_bgc_hover: rgb(216, 220, 221);
 $def_btn_shdw: 3px 3px 1px rgb(150, 148, 148);
 $def_btn_shdw_active: 1px 1px 1px black;
 $def_btn_pad: 4px;
@@ -60,11 +61,14 @@ button {
   border-radius: $def_btn_rad;
   box-shadow: $def_btn_shdw;
 }
-button:hover {
-  background-color: $def_btn_bgc_hover;
+
+// PROJECT SPECIFIC
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-flow: row;
 }
 
-button:active {
-  box-shadow: $def_btn_shdw_active;
-  transform: translateY(1px);
+@media only screen and (max-width: 768px) {
 }

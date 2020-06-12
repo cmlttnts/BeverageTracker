@@ -1,0 +1,52 @@
+@use "./BeverageCardVars" as bcard;
+
+.BeverageCard {
+  //Colors, Fonts, Borders
+  background-color: rgb(201, 201, 236);
+  border: 1px solid red;
+  //Display
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  //Diamensions
+  width: 45vw;
+  height: 33.3vh;
+
+  //Position
+  //Margin, Padding
+  //Transition, Animation
+}
+
+.BeverageButton {
+  width: 60%;
+  height: 60%;
+}
+
+.BeverageImg {
+  //Colors, Fonts, Borders
+  border-radius: 50%;
+  //Display
+
+  display: inline-block;
+  // object-fit: cover;
+  //Diamensions
+  width: 90%;
+  height: 90%;
+
+  min-width: bcard.$buttonImgMinW;
+  min-height: bcard.$buttonImgMinH;
+
+  max-width: bcard.$buttonImgMaxW;
+  max-height: bcard.$buttonImgMaxH;
+  //Position
+  //Margin, Padding
+  //Transition, Animation
+}
+
+.BeverageCard ul {
+  border: 1px solid red;
+  list-style: none;
+  width: 100%;
+  height: 100%;
+}
