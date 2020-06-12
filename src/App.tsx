@@ -1,4 +1,5 @@
 import React from 'react';
+import 'cemo.scss';
 
 const App = (): JSX.Element => (
   <div className="App">
