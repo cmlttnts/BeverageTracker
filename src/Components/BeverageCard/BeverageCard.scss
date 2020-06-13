@@ -2,22 +2,42 @@
 @use '~main.scss' as main;
 .BeverageCard {
   //Colors, Fonts, Borders
-  background-color: rgb(201, 201, 236);
-  border: 1px solid red;
+  background-color: rgb(220, 220, 245);
+  // border: 1px solid red;
+  box-shadow: 2px 2px 1px rgb(78, 77, 77);
+  border-radius: 4%;
   //Display
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  //Diamensions
+  width: 45vw;
+  min-width: 150px;
+
+  // height: 33.3vh;
+  min-height: 150px;
+  //Position
+  //Margin, Padding
+  padding-left: 4px;
+  padding-right: 4px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  //Transition, Animation
+
+  h4 {
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}
+
+.card-container {
+  height: 100%;
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  //Diamensions
-  width: 40vw;
-  min-width: 150px;
-
-  height: 33.3vh;
-  min-height: 150px;
-  //Position
-  //Margin, Padding
-  //Transition, Animation
 }
 
 .BeverageButton {
@@ -46,11 +66,12 @@
   //Transition, Animation
 }
 
-.BeverageCard ul {
+.TimestampList {
   border: 1px solid red;
   list-style: none;
   width: 100%;
-  height: 100%;
+  height: auto;
+  margin: 4% 4%;
 }
 
 @media only screen and (min-width: main.$small-start-width) {
@@ -67,9 +88,15 @@
   .BeverageCard {
     width: 18vw;
   }
+  .BeverageButton:hover {
+    background-color: main.$def_btn_bgc_hover;
+  }
 }
 @media only screen and (min-width: main.$x-large-start-width) {
   .BeverageCard {
     width: 14vw;
+  }
+  .BeverageButton:hover {
+    background-color: main.$def_btn_bgc_hover;
   }
 }

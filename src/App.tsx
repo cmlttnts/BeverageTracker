@@ -1,22 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BeverageCard from 'Components/BeverageCard/BeverageCard';
-import tea from 'Images/tea.jpg';
 import 'main.scss';
+//where the beverage images imported and exported as array
+import imageArray from 'ImageArray';
 
-const App = (): JSX.Element => (
-  <div className="App">
-    <div className="container">
-      <BeverageCard imgSrc={tea} name="Tea0" />
-      <BeverageCard imgSrc={tea} name="Tea1" />
-      <BeverageCard imgSrc={tea} name="Tea2" />
-      <BeverageCard imgSrc={tea} name="Tea3" />
-      <BeverageCard imgSrc={tea} name="Tea4" />
-      <BeverageCard imgSrc={tea} name="Tea5" />
-      <BeverageCard imgSrc={tea} name="Tea6" />
-      <BeverageCard imgSrc={tea} name="Tea7" />
-      <BeverageCard imgSrc={tea} name="Tea8" />
+const BEVERAGE_LIST = [
+  'Tea', 'Coffee', 'Turkish Coffee',
+  'Soda', 'Coke', 'Lemonade',
+  'Orange Juice', 'Hot Beverage', 'Water',
+];
+
+
+const App = (): JSX.Element => {
+
+  const [searchText, setSearchText] = useState<string>('');
+
+  //just update the state
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchText(e.target.value);
+  };
+  /**
+   * check if string includes substring case insensitive
+   * @param beverageName: name to be searched
+   */
+  function includesStr(beverageName: string): boolean {
+    return beverageName.toLowerCase().includes(searchText.toLowerCase());
+  }
+
+  return (
+    <div className="App">
+      <h1>Beverage Tracker</h1>
+      <label htmlFor="search">
+        Search
+        <input type="text" name="search" id="search" onChange={handleChange} value={searchText} />
+      </label>
+      <div className="container">
+
+        {BEVERAGE_LIST.filter(includesStr).map(
+          (beverage, index) => (
+            <BeverageCard
+              imgSrc={imageArray[index]}
+              name={beverage}
+              key={beverage}
+            />
+          ),
+        )}
+
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default App;
