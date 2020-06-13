@@ -30,7 +30,7 @@ function useTimeList(): [() => void, TimeType[]] {
    */
   const handleClick = (): void => {
     const now = getTimeInMins();
-    if (now - prevTime.current < 30) {
+    if (now - prevTime.current < 1) {
       console.log('Too quick, wait 30 mins');
 
       return;

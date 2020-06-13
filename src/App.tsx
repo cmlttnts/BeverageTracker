@@ -4,12 +4,24 @@ import 'main.scss';
 //where the beverage images imported and exported as array
 import imageArray from 'ImageArray';
 
-const BEVERAGE_LIST = [
+const BEVERAGE_NAMES = [
   'Tea', 'Coffee', 'Turkish Coffee',
   'Soda', 'Coke', 'Lemonade',
   'Orange Juice', 'Hot Beverage', 'Water',
 ];
 
+type BeverageType = {
+  name: string;
+  imgSrc: string;
+};
+
+
+const BEVERAGE_LIST: Array<BeverageType> = BEVERAGE_NAMES.map(
+  (name, index) => ({
+    name,
+    imgSrc: imageArray[index],
+  }),
+);
 
 const App = (): JSX.Element => {
 
@@ -20,11 +32,11 @@ const App = (): JSX.Element => {
     setSearchText(e.target.value);
   };
   /**
-   * check if string includes substring case insensitive
-   * @param beverageName: name to be searched
+   * check if name of the beverage includes search substring case insensitive
+   * @param beverage: to be searched
    */
-  function includesStr(beverageName: string): boolean {
-    return beverageName.toLowerCase().includes(searchText.toLowerCase());
+  function includesStr(beverage: BeverageType): boolean {
+    return beverage.name.toLowerCase().includes(searchText.toLowerCase());
   }
 
   return (
@@ -37,11 +49,11 @@ const App = (): JSX.Element => {
       <div className="container">
 
         {BEVERAGE_LIST.filter(includesStr).map(
-          (beverage, index) => (
+          (beverage) => (
             <BeverageCard
-              imgSrc={imageArray[index]}
-              name={beverage}
-              key={beverage}
+              imgSrc={beverage.imgSrc}
+              name={beverage.name}
+              key={beverage.name}
             />
           ),
         )}
