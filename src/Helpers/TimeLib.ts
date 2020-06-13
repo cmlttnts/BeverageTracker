@@ -14,12 +14,18 @@ export function isDayChange(curHour: number): boolean {
   return curHour === 0;
 }
 
+/**
+ * get time in milliseconds from 1970
+ */
+export function getTimeInMins(): number {
+  //now() returns milliseconds =>  x1000 to sec => x60 to minute
+  return Date.now() / 6000;
+}
 
 /**
  * returns unique id to use as a key in array expansions in JSX
  */
 
 export function getUniqueId(): string {
-  const date = new Date();
-  return date.getTime().toString();
+  return Date.now().toString();
 }

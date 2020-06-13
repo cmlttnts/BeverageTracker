@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { getHourAndMin, getUniqueId } from 'Helpers/TimeLib';
+import React, { useState, useRef } from 'react';
+import { getHourAndMin, getUniqueId, getTimeInMins } from 'Helpers/TimeLib';
 import './BeverageCard.scss';
 
 
@@ -23,11 +23,19 @@ type TimeType = {
  */
 function useTimeList(): [() => void, TimeType[]] {
   const [timeList, setTimeList] = useState<Array<TimeType>>([]);
+  const prevTime = useRef(0);
 
   /**
    * pushes a new Time Object to timeList
    */
   const handleClick = (): void => {
+    const now = getTimeInMins();
+    if (now - prevTime.current < 30) {
+      console.log('Too quick, wait 30 mins');
+
+      return;
+    }
+    prevTime.current = now;
     const newTimeList = [...timeList];
     newTimeList.push(
       {
