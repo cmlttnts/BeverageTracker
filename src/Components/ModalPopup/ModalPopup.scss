@@ -1,0 +1,37 @@
+@use "./ModalPopupVars";
+
+.ModalPopup {
+  //Colors, Fonts, Borders
+  background-color: rgb(247, 153, 115);
+  box-shadow: 3px 3px 3px rgb(53, 52, 52);
+  border-radius: 10px;
+  font-size: 2rem;
+  //Display
+  text-align: center;
+  //Diamensions,
+  width: 50%;
+  height: 0;
+  // height: 10px;
+  //Position
+  position: fixed;
+  top: -30vh;
+  left: 25vw;
+  //Margin, Padding
+  margin: 0 auto;
+  padding: 1rem;
+  //Transition, Animation
+  transition: all 0.3s ease-in;
+}
+
+.ActivePopup {
+  //Colors, Fonts, Borders
+  //Display
+  z-index: 2;
+  //Diamensions
+  height: auto;
+  //Position
+  top: 0vh;
+  //Margin, Padding
+  //Transition, Animation
+  // transition: all 2.5s ease-in;
+}

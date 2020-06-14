@@ -1,65 +1,30 @@
-import React, { useState, useRef } from 'react';
-import { getHourAndMin, getUniqueId, getTimeInMins } from 'Helpers/TimeLib';
+import React from 'react';
+import useTimeList, { PopupCbType } from './useTimeList';
 import './BeverageCard.scss';
-
 
 // Define types
 type BeverageCardPropType= {
   imgSrc: string;
   name: string;
+  popupCb: PopupCbType;
+  isMatch: boolean;
 };
 
 /**
- * @param text: hour.minute string
- * @param id: unique id for JSX array expansion
- */
-type TimeType = {
-  text: string;
-  id: string;
-};
-
-/**
- * custom hook, returns click event handler and array of Time Objects
- */
-function useTimeList(): [() => void, TimeType[]] {
-  const [timeList, setTimeList] = useState<Array<TimeType>>([]);
-  const prevTime = useRef(0);
-
-  /**
-   * pushes a new Time Object to timeList
-   */
-  const handleClick = (): void => {
-    const now = getTimeInMins();
-    if (now - prevTime.current < 1) {
-      console.log('Too quick, wait 30 mins');
-
-      return;
-    }
-    prevTime.current = now;
-    const newTimeList = [...timeList];
-    newTimeList.push(
-      {
-        text: getHourAndMin(),
-        id: getUniqueId(),
-      },
-    );
-    setTimeList(newTimeList);
-  };
-
-  return [handleClick, timeList];
-}
-
-
-/**
- * Card styled Container Component to display Beverages and their Time Trackers
+ * Card style Container Component to display Beverages and their Time Lists
  * @param imgSrc: source url for the image to be displayed on the card
- * @param name: name of beverage as title and alt attiribute for image
+ * @param name: name of beverage as title and alt attribute for image
+ * @param popupCb:  popup message function callback when the click is too fast
+ * @param isMatch: should display or not wrt search result
  */
-const BeverageCard = ({ imgSrc, name }: BeverageCardPropType): JSX.Element => {
-  const [handleClick, timeList] = useTimeList();
+const BeverageCard = ({
+  imgSrc, name, popupCb, isMatch,
+}: BeverageCardPropType): JSX.Element => {
+
+  const [handleClick, timeList] = useTimeList(popupCb, name);
 
   return (
-    <div className="BeverageCard">
+    <div className="BeverageCard" style={{ display: isMatch ? 'flex' : 'none' }}>
       <h4>{name}</h4>
       <div className="card-container">
 
@@ -69,7 +34,7 @@ const BeverageCard = ({ imgSrc, name }: BeverageCardPropType): JSX.Element => {
         <ul className="TimestampList">
           {timeList.map(
             (time) => (
-              <li key={time.id}>
+              <li className={time.cName} key={time.id}>
                 {time.text}
               </li>
             ),
@@ -80,4 +45,4 @@ const BeverageCard = ({ imgSrc, name }: BeverageCardPropType): JSX.Element => {
   );
 };
 
-export default BeverageCard;
+export default React.memo(BeverageCard);
