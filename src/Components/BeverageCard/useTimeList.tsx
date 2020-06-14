@@ -1,32 +1,32 @@
 import { useState, useRef, useEffect } from 'react';
+
 import {
   getHourAndMin, getUniqueId, getTimeInSecs,
 } from 'Helpers/TimeLib';
 
 export type PopupCbType = (msg: string) => void;
 
-
 /**
- * @param text: hour.minute string
- * @param id: unique id for JSX array expansion
- * @param cName: class name for styling
+ * @param text hour.minute string
+ * @param id unique id for JSX array expansion
+ * @param cName class name for styling
  */
 type TimeType = {
   text: string;
   id: string;
   cName: string;
 };
-
+/**
+ * Return the saved list from local storage if exists or empty list
+ * @param name name of the beverage as a key to check local storage
+ */
 function startList(name: string): Array<TimeType> {
   const stored = localStorage.getItem(name);
   if (stored) return JSON.parse(stored);
   return [];
 }
 
-
 const clickDebounceInSec = 60; //60 seconds for now
-let popupActive = true;
-
 
 /**
  * custom hook, returns click event handler and array of Time Objects
@@ -39,7 +39,7 @@ function useTimeList(
 
   const [timeList, setTimeList] = useState<Array<TimeType>>(startList(beverageName));
   const prevTime = useRef(0);
-
+  const popupDone = useRef(false);
   //Update local stoage if list of times changes
   useEffect(() => {
     localStorage.setItem(beverageName, JSON.stringify(timeList));
@@ -51,10 +51,7 @@ function useTimeList(
     if (isNewDay) {
       localStorage.setItem(beverageName, JSON.stringify([]));
       setTimeList([]);
-
     }
-
-
   }, [beverageName, isNewDay]);
 
 
@@ -65,9 +62,9 @@ function useTimeList(
 
     const now = getTimeInSecs();
     if (now - prevTime.current < clickDebounceInSec) {
-      if (popupActive) {
-        popupActive = false;
-        popupCb('You are clicking too fast, wait for the next minute');
+      if (!popupDone.current) {
+        popupDone.current = true;
+        popupCb('You can add time once a minute');
         setTimeout(
           () => { popupCb(''); },
           2000,
@@ -75,9 +72,9 @@ function useTimeList(
       }
       return;
     }
+    popupDone.current = false;
     prevTime.current = now;
     const newTimeList = [...timeList];
-    popupActive = true;
     newTimeList.push({
       text: getHourAndMin(),
       id: getUniqueId(),

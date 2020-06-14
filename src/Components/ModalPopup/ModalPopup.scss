@@ -1,21 +1,21 @@
-@use "./ModalPopupVars";
+@use "./ModalPopupVars" as modal;
 
 .ModalPopup {
   //Colors, Fonts, Borders
-  background-color: rgb(247, 153, 115);
-  box-shadow: 3px 3px 3px rgb(53, 52, 52);
-  border-radius: 10px;
-  font-size: 2rem;
+  background-color: modal.$bgc;
+  box-shadow: modal.$box-shadow;
+  border-radius: modal.$border-r;
+  font-size: modal.$font-size;
   //Display
   text-align: center;
   //Diamensions,
-  width: 50%;
+  width: modal.$width;
   height: 0;
   // height: 10px;
   //Position
   position: fixed;
-  top: -30vh;
-  left: 25vw;
+  top: modal.$start-top;
+  left: modal.$left;
   //Margin, Padding
   margin: 0 auto;
   padding: 1rem;
@@ -30,7 +30,7 @@
   //Diamensions
   height: auto;
   //Position
-  top: 0vh;
+  top: modal.$end-top;
   //Margin, Padding
   //Transition, Animation
   // transition: all 2.5s ease-in;

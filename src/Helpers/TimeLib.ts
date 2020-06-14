@@ -36,14 +36,18 @@ export function getUniqueId(): string {
   return Date.now().toString();
 }
 
-
+/**
+ * returns the saved day from local storage
+ */
 const LAST_DAY_KEY = 'LastSavedDay';
 export function getLastSavedDay(): string {
 
   return localStorage.getItem(LAST_DAY_KEY) || '';
 }
 
-
+/**
+ * saves the day to local storage
+ */
 export function savedDay(): void {
   localStorage.setItem(LAST_DAY_KEY, getDayMonthYear());
 }

@@ -13,10 +13,10 @@ type BeverageCardPropType= {
 
 /**
  * Card style Container Component to display Beverages and their Time Lists
- * @param imgSrc: source url for the image to be displayed on the card
- * @param name: name of beverage as title and alt attribute for image
- * @param popupCb:  popup message function callback when the click is too fast
- * @param isMatch: should display or not wrt search result
+ * @param imgSrc source url for the image to be displayed on the card
+ * @param name name of beverage as title and alt attribute for image
+ * @param popupCb popup message function callback when the click is too fast
+ * @param isMatch should display or not wrt search result
  */
 const BeverageCard = ({
   imgSrc, name, popupCb, isMatch, isNewDay,
@@ -46,4 +46,4 @@ const BeverageCard = ({
   );
 };
 
-export default React.memo(BeverageCard);
+export default BeverageCard;

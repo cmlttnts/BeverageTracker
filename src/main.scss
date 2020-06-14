@@ -7,7 +7,6 @@
 
 html {
   font-family: Arial, Helvetica, sans-serif;
-  border: 1px solid green;
 }
 
 // ANCHOR TAG
@@ -64,11 +63,17 @@ button {
 }
 
 // PROJECT SPECIFIC
+$page-bgc: rgb(240, 183, 183);
+
 //mobile size is written as default, other cut points here
 $small-start-width: 500px;
 $medium-start-width: 768px;
 $large-start-width: 960px;
 $x-large-start-width: 1200px;
+
+html {
+  background-color: $page-bgc;
+}
 
 .App {
   text-align: center;
@@ -91,16 +96,18 @@ $x-large-start-width: 1200px;
 .SearchArea {
   //Colors, Fonts, Borders
   font-size: 1.5rem;
-  //Display
-  //Diamensions
-  //Position
+}
+
+.SearchInput {
+  //Colors, Fonts, Borders
+  font-size: inherit;
+  height: 2rem;
   //Margin, Padding
-  //Transition, Animation
-  input {
-    margin-left: 1rem;
-    height: 1.7rem;
-    font-size: inherit;
-  }
+  margin-left: 1rem;
+}
+
+.SearchInput:focus {
+  outline: $def_btn_bgc solid 3px;
 }
 
 .Striked {

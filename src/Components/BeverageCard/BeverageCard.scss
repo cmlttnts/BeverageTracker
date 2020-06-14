@@ -2,10 +2,10 @@
 @use '~main.scss' as main;
 .BeverageCard {
   //Colors, Fonts, Borders
-  background-color: rgb(220, 220, 245);
+  background-color: bcard.$bgc;
   // border: 1px solid red;
-  box-shadow: 2px 2px 1px rgb(78, 77, 77);
-  border-radius: 4%;
+  box-shadow: bcard.$box-shadow;
+  border-radius: bcard.$border-r;
   //Display
   display: flex;
   flex-direction: column;
@@ -13,10 +13,10 @@
   align-items: center;
   //Diamensions
   width: 45vw;
-  min-width: 150px;
+  min-width: bcard.$min-w;
 
   // height: 33.3vh;
-  min-height: 150px;
+  min-height: bcard.$min-h;
   //Position
   //Margin, Padding
   padding-left: 4px;
@@ -67,10 +67,13 @@
 }
 
 .TimestampList {
-  border: 1px solid red;
+  border: bcard.$timestamp-border;
+  border-radius: 5px;
   list-style: none;
+  font-weight: 600;
   width: 100%;
   height: auto;
+  min-height: 1rem;
   margin: 4% 4%;
 }
 
