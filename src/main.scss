@@ -88,6 +88,25 @@ $x-large-start-width: 1200px;
   // gap: 5px;
 }
 
+.SearchArea {
+  //Colors, Fonts, Borders
+  font-size: 1.5rem;
+  //Display
+  //Diamensions
+  //Position
+  //Margin, Padding
+  //Transition, Animation
+  input {
+    margin-left: 1rem;
+    height: 1.7rem;
+    font-size: inherit;
+  }
+}
+
+.Striked {
+  text-decoration: line-through;
+}
+
 @media only screen and (min-width: $small-start-width) {
   .container {
     grid-template-columns: repeat(3, 1fr);

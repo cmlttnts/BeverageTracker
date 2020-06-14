@@ -8,6 +8,7 @@ type BeverageCardPropType= {
   name: string;
   popupCb: PopupCbType;
   isMatch: boolean;
+  isNewDay: boolean;
 };
 
 /**
@@ -18,10 +19,10 @@ type BeverageCardPropType= {
  * @param isMatch: should display or not wrt search result
  */
 const BeverageCard = ({
-  imgSrc, name, popupCb, isMatch,
+  imgSrc, name, popupCb, isMatch, isNewDay,
 }: BeverageCardPropType): JSX.Element => {
 
-  const [handleClick, timeList] = useTimeList(popupCb, name);
+  const [handleClick, timeList] = useTimeList(popupCb, name, isNewDay);
 
   return (
     <div className="BeverageCard" style={{ display: isMatch ? 'flex' : 'none' }}>

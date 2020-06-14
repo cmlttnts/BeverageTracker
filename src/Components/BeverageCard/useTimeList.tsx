@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-  getHourAndMin, getUniqueId, getTimeInSecs, isDayChange,
+  getHourAndMin, getUniqueId, getTimeInSecs,
 } from 'Helpers/TimeLib';
 
 export type PopupCbType = (msg: string) => void;
@@ -24,12 +24,19 @@ function startList(name: string): Array<TimeType> {
 }
 
 
-const clickDebounceInSec = 3; //30 seconds
+const clickDebounceInSec = 60; //60 seconds for now
+let popupActive = true;
+
 
 /**
  * custom hook, returns click event handler and array of Time Objects
  */
-function useTimeList(popupCb: PopupCbType, beverageName: string): [() => void, TimeType[]] {
+function useTimeList(
+  popupCb: PopupCbType,
+  beverageName: string,
+  isNewDay: boolean,
+): [() => void, TimeType[]] {
+
   const [timeList, setTimeList] = useState<Array<TimeType>>(startList(beverageName));
   const prevTime = useRef(0);
 
@@ -40,9 +47,15 @@ function useTimeList(popupCb: PopupCbType, beverageName: string): [() => void, T
 
   //Reset the local storage at midnight so new day starts with empty list
   useEffect(() => {
-    if (isDayChange()) { localStorage.setItem(beverageName, JSON.stringify([])); }
 
-  }, [beverageName]);
+    if (isNewDay) {
+      localStorage.setItem(beverageName, JSON.stringify([]));
+      setTimeList([]);
+
+    }
+
+
+  }, [beverageName, isNewDay]);
 
 
   /**
@@ -52,17 +65,19 @@ function useTimeList(popupCb: PopupCbType, beverageName: string): [() => void, T
 
     const now = getTimeInSecs();
     if (now - prevTime.current < clickDebounceInSec) {
-
-      popupCb('You are clicking too fast');
-      setTimeout(
-        () => { popupCb(''); },
-        1000,
-      );
+      if (popupActive) {
+        popupActive = false;
+        popupCb('You are clicking too fast, wait for the next minute');
+        setTimeout(
+          () => { popupCb(''); },
+          2000,
+        );
+      }
       return;
     }
     prevTime.current = now;
     const newTimeList = [...timeList];
-
+    popupActive = true;
     newTimeList.push({
       text: getHourAndMin(),
       id: getUniqueId(),
