@@ -11,10 +11,7 @@ type ModalPopupPropType= {
 
 const ModalPopup = ({ msg, isActive }: ModalPopupPropType): JSX.Element => {
 
-  const newClassName = isActive ? ' ActivePopup' : '';
-
-  return <div className={`ModalPopup${newClassName}`}>{msg}</div>;
+  return <div className={`ModalPopup${isActive ? ' ActivePopup' : ''}`}>{msg}</div>;
 };
 
 export default React.memo(ModalPopup);
-// export default ModalPopup;

@@ -8,7 +8,7 @@ type BeverageCardPropType= {
   name: string;
   popupCb: PopupCbType;
   isMatch: boolean;
-  isNewDay: boolean;
+  shouldReset: boolean;
 };
 
 /**
@@ -17,12 +17,13 @@ type BeverageCardPropType= {
  * @param name name of beverage as title and alt attribute for image
  * @param popupCb popup message function callback when the click is too fast
  * @param isMatch should display or not wrt search result
+ * @param shouldReset should the list of times be removed
  */
 const BeverageCard = ({
-  imgSrc, name, popupCb, isMatch, isNewDay,
+  imgSrc, name, popupCb, isMatch, shouldReset,
 }: BeverageCardPropType): JSX.Element => {
 
-  const [handleClick, timeList] = useTimeList(popupCb, name, isNewDay);
+  const [handleClick, timeList] = useTimeList(popupCb, name, shouldReset);
 
   return (
     <div className="BeverageCard" style={{ display: isMatch ? 'flex' : 'none' }}>

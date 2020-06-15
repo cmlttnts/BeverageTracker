@@ -1,53 +1,35 @@
 import React, { useState, useEffect, useRef } from 'react';
 import BeverageCard from 'Components/BeverageCard/BeverageCard';
 import ModalPopup from 'Components/ModalPopup/ModalPopup';
-import { getLastSavedDay, getDayMonthYear, savedDay } from 'Helpers/TimeLib';
+import { BEVERAGE_LIST } from 'beverageList';
 
-//where the beverage images imported and exported as array
-import imageArray from 'ImageArray';
+import { getLastSavedDay, getDayMonthYear, savedDay } from 'Helpers/TimeLib';
+import includesStr from 'Helpers/StringLib';
 import 'main.scss';
 
-
-const BEVERAGE_NAMES = [
-  'Tea', 'Coffee', 'Turkish Coffee',
-  'Espresso', 'Americano', 'Latte',
-  'Macchiato', 'Cappucino', 'Mocha',
-];
-
-type BeverageType = {
-  name: string;
-  imgSrc: string;
-};
-
 /**
- * Combine names and images into beverage object array
+ * Top Level Component
  */
-const BEVERAGE_LIST: Array<BeverageType> = BEVERAGE_NAMES.map(
-  (name, index) => ({
-    name,
-    imgSrc: imageArray[index],
-  }),
-);
-
 const App = (): JSX.Element => {
-
+  //Hold search input state
   const [searchText, setSearchText] = useState<string>('');
-  const [dayChanged, setDayChanged] = useState<boolean>(false);
-
+  const [needsReset, setNeedsReset] = useState<boolean>(false);
+  //if multiple clicks happen very quickly, popup message needs to be active
   const [popupActive, setPopupActive] = useState<boolean>(false);
   const message = useRef('');
 
   //Check if the last saved day is different than today, which will reset time lists
   //also save the day afterwards
   useEffect(() => {
-    //we need to set dayChaned to true once, and set false after that render
-    if (dayChanged) { setDayChanged(false); }
+    //we need to set it to true once, and set false after that render
+    //otherwise every render it resets
+    if (needsReset) { setNeedsReset(false); }
 
     if (!(getLastSavedDay() === getDayMonthYear())) {
-      setDayChanged(true);
+      setNeedsReset(true);
       savedDay();
     }
-  }, [dayChanged]);
+  }, [needsReset]);
 
   //toggle popup window's class, animation shows up when active
   const handlePopup = (msg: string): void => {
@@ -55,18 +37,13 @@ const App = (): JSX.Element => {
     if (msg === '') { setPopupActive(false); } else { setPopupActive(true); }
   };
 
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleSeachChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchText(e.target.value);
   };
 
-  /**
-   * check if name of the beverage includes search substring case insensitive
-   * @param beverage to be searched
-   */
-  function includesStr(beverage: BeverageType): boolean {
-    return beverage.name.toLowerCase().includes(searchText.toLowerCase());
-  }
+  const handleReset = (): void => {
+    setNeedsReset(true);
+  };
 
   return (
     <div className="App">
@@ -75,7 +52,7 @@ const App = (): JSX.Element => {
 
       <label className="SearchArea" htmlFor="search">
         Search:
-        <input className="SearchInput" type="text" name="search" id="search" onChange={handleChange} value={searchText} />
+        <input className="SearchInput" type="text" name="search" id="search" onChange={handleSeachChange} value={searchText} />
       </label>
 
       <div className="container">
@@ -85,14 +62,14 @@ const App = (): JSX.Element => {
               imgSrc={beverage.imgSrc}
               name={beverage.name}
               popupCb={handlePopup}
-              isMatch={includesStr(beverage)}
+              isMatch={includesStr(beverage.name, searchText)}
               key={beverage.name}
-              isNewDay={dayChanged}
+              shouldReset={needsReset}
             />
           ),
         )}
       </div>
-
+      <button type="button" className="ResetButton" onClick={handleReset}>Reset All</button>
       <ModalPopup msg={message.current} isActive={popupActive} />
 
     </div>

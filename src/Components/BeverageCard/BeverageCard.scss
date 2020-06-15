@@ -1,5 +1,5 @@
 @use "./BeverageCardVars" as bcard;
-@use '~main.scss' as main;
+@use '../../mainVars' as main;
 .BeverageCard {
   //Colors, Fonts, Borders
   background-color: bcard.$bgc;
@@ -21,8 +21,8 @@
   //Margin, Padding
   padding-left: 4px;
   padding-right: 4px;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   //Transition, Animation
 
   h4 {

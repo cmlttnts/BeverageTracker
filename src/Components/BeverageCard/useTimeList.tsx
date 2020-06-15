@@ -34,7 +34,7 @@ const clickDebounceInSec = 60; //60 seconds for now
 function useTimeList(
   popupCb: PopupCbType,
   beverageName: string,
-  isNewDay: boolean,
+  shouldReset: boolean,
 ): [() => void, TimeType[]] {
 
   const [timeList, setTimeList] = useState<Array<TimeType>>(startList(beverageName));
@@ -48,11 +48,11 @@ function useTimeList(
   //Reset the local storage at midnight so new day starts with empty list
   useEffect(() => {
 
-    if (isNewDay) {
+    if (shouldReset) {
       localStorage.setItem(beverageName, JSON.stringify([]));
       setTimeList([]);
     }
-  }, [beverageName, isNewDay]);
+  }, [beverageName, shouldReset]);
 
 
   /**

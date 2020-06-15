@@ -1,0 +1,22 @@
+// ANCHOR TAG
+$pri_link_col: rgb(24, 24, 231);
+$pri_link_col_active: rgb(226, 223, 223);
+$pri_link_col_visited: rgb(175, 37, 175);
+
+// BUTTON
+
+$def_btn_bgc: rgb(50, 138, 221);
+$def_btn_bgc_hover: rgb(133, 183, 233);
+$def_btn_shdw: 3px 3px 1px rgb(150, 148, 148);
+$def_btn_shdw_active: 1px 1px 1px black;
+$def_btn_pad: 4px;
+$def_btn_rad: 4px;
+
+// PROJECT SPECIFIC
+$page-bgc: rgb(240, 183, 183);
+
+//mobile size is written as default, other cut points here
+$small-start-width: 500px;
+$medium-start-width: 768px;
+$large-start-width: 960px;
+$x-large-start-width: 1200px;

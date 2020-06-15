@@ -1,3 +1,5 @@
+@use './mainVars' as main;
+
 //GENERAL RESETS, CONFIGS TEMPLATE
 * {
   box-sizing: border-box;
@@ -9,14 +11,9 @@ html {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-// ANCHOR TAG
-$pri_link_col: rgb(24, 24, 231);
-$pri_link_col_active: rgb(226, 223, 223);
-$pri_link_col_visited: rgb(175, 37, 175);
-
 a {
   font-size: 1.2rem;
-  color: $pri_link_col;
+  color: main.$pri_link_col;
   cursor: pointer;
   display: inline-block;
   outline: none;
@@ -26,29 +23,20 @@ a {
 }
 
 a:link {
-  color: $pri_link_col;
+  color: main.$pri_link_col;
 }
 a:hover {
   text-decoration: underline;
 }
 a:active {
-  background-color: $pri_link_col_active;
+  background-color: main.$pri_link_col_active;
 }
 a:visited {
-  color: $pri_link_col_visited;
+  color: main.$pri_link_col_visited;
 }
 
-// BUTTON
-
-$def_btn_bgc: rgb(50, 138, 221);
-$def_btn_bgc_hover: rgb(133, 183, 233);
-$def_btn_shdw: 3px 3px 1px rgb(150, 148, 148);
-$def_btn_shdw_active: 1px 1px 1px black;
-$def_btn_pad: 4px;
-$def_btn_rad: 4px;
-
 button {
-  background-color: $def_btn_bgc;
+  background-color: main.$def_btn_bgc;
   font-size: inherit;
   cursor: pointer;
   display: inline-block;
@@ -57,22 +45,13 @@ button {
   border: none;
   text-decoration: none;
   text-align: center;
-  padding: $def_btn_pad;
-  border-radius: $def_btn_rad;
-  box-shadow: $def_btn_shdw;
+  padding: main.$def_btn_pad;
+  border-radius: main.$def_btn_rad;
+  box-shadow: main.$def_btn_shdw;
 }
 
-// PROJECT SPECIFIC
-$page-bgc: rgb(240, 183, 183);
-
-//mobile size is written as default, other cut points here
-$small-start-width: 500px;
-$medium-start-width: 768px;
-$large-start-width: 960px;
-$x-large-start-width: 1200px;
-
 html {
-  background-color: $page-bgc;
+  background-color: main.$page-bgc;
 }
 
 .App {
@@ -107,30 +86,42 @@ html {
 }
 
 .SearchInput:focus {
-  outline: $def_btn_bgc solid 3px;
+  outline: main.$def_btn_bgc solid 3px;
+}
+
+.ResetButton {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .Striked {
   text-decoration: line-through;
 }
 
-@media only screen and (min-width: $small-start-width) {
+@media only screen and (min-width: main.$small-start-width) {
   .container {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-@media only screen and (min-width: $medium-start-width) {
+@media only screen and (min-width: main.$medium-start-width) {
   .container {
     grid-template-columns: repeat(4, 1fr);
   }
 }
-@media only screen and (min-width: $large-start-width) {
+@media only screen and (min-width: main.$large-start-width) {
   .container {
     grid-template-columns: repeat(5, 1fr);
   }
+  .ResetButton:hover {
+    background-color: main.$def_btn_bgc_hover;
+  }
 }
-@media only screen and (min-width: $x-large-start-width) {
+@media only screen and (min-width: main.$x-large-start-width) {
   .container {
     grid-template-columns: repeat(6, 1fr);
+  }
+  .ResetButton:hover {
+    background-color: main.$def_btn_bgc_hover;
   }
 }
