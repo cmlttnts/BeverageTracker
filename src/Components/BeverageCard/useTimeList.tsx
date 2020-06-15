@@ -26,6 +26,7 @@ function startList(name: string): Array<TimeType> {
   return [];
 }
 
+//How many seconds to reclick
 const clickDebounceInSec = 60; //60 seconds for now
 
 /**
@@ -64,7 +65,7 @@ function useTimeList(
     if (now - prevTime.current < clickDebounceInSec) {
       if (!popupDone.current) {
         popupDone.current = true;
-        popupCb('You can add time once a minute');
+        popupCb(`You can add time once a ${clickDebounceInSec} sec`);
         setTimeout(
           () => { popupCb(''); },
           2000,

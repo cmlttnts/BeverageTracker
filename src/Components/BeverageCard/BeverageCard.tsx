@@ -27,7 +27,7 @@ const BeverageCard = ({
 
   return (
     <div className="BeverageCard" style={{ display: isMatch ? 'flex' : 'none' }}>
-      <h4>{name}</h4>
+      <h3>{name}</h3>
       <div className="card-container">
 
         <button className="BeverageButton" type="button" onClick={handleClick}>
