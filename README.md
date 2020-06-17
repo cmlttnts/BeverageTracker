@@ -9,8 +9,8 @@ Master is dev branch, production build is at gh-pages branch,which is also live 
 
 ## Features
 
- 1- Everyday timestapms reset automatically
+ 1- Everyday timestamps reset automatically
 
- 2- Reset All button is for to showcase reset funtionality when the day changes
+ 2- Reset All button is to showcase reset funtionality when the day changes
 
  3- No backend for this app but the timestamps are recorded on local storage for showcasing the behaviour
