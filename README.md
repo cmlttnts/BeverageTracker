@@ -14,3 +14,5 @@ Master is dev branch, production build is at gh-pages branch,which is also live 
  2- Reset All button is to showcase reset funtionality when the day changes
 
  3- No backend for this app but the timestamps are recorded on local storage for showcasing the behaviour
+ 
+ 4- Clicking multiple times very quickly is probably not an intended action, so it show popup when you click too fast 
