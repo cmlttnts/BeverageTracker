@@ -1,0 +1,17 @@
+@use "./FooterVars";
+
+.Footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: white;
+  padding: 1rem;
+  background-color: rgb(94, 91, 91);
+  a {
+    background-color: blue;
+    color: white;
+    padding: 0.2rem;
+    border-radius: 5px;
+  }
+}
