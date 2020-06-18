@@ -6,6 +6,7 @@ import { BEVERAGE_LIST } from 'beverageList';
 import { getLastSavedDay, getDayMonthYear, savedDay } from 'Helpers/TimeLib';
 import includesStr from 'Helpers/StringLib';
 import 'main.scss';
+import Footer from 'Components/Footer/Footer';
 
 /**
  * Top Level Component
@@ -71,7 +72,7 @@ const App = (): JSX.Element => {
       </div>
       <button type="button" className="ResetButton" onClick={handleReset}>Reset All</button>
       <ModalPopup msg={message.current} isActive={popupActive} />
-
+      <Footer />
     </div>
   );
 };
